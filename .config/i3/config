@@ -5,12 +5,29 @@
 # this file and re-run i3-config-wizard(1).
 #
 
+set $base00 #101218
+set $base01 #1f222d
+set $base02 #252936
+set $base03 #7780a1
+set $base04 #C0C5CE
+set $base05 #d1d4e0
+set $base06 #C9CCDB
+set $base07 #ffffff
+set $base08 #ee829f
+set $base09 #f99170
+set $base0A #ffefcc
+set $base0B #a5ffe1
+set $base0C #97e0ff
+set $base0D #97bbf7
+set $base0E #c0b7f9
+set $base0F #fcc09e
+
 # i3 config file (v4)
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 exec --no-startup-id vmware-user-suid-wrapper
 exec --no-startup-id guake
-exec --no-startup-id nitrogen --restore
+exec_always --no-startup-id nitrogen --restore
 exec --no-startup-id xrandr --output Virtual1 --mode "1280x768"
 
 set $mod Mod1
@@ -47,7 +64,7 @@ mode $brownee_launcher {
 	# start dmenu (a program launcher)
 	# bindsym d exec dmenu_run
 	##bindsym d kill ; mode "default"
-	bindsym r exec dmenu_run -fn '--fixed-bold-r-normal--15' ; mode "default"
+	bindsym r exec rofi -show run -opacity "75" ; mode "default"
 	#bindsym $mod+r exec mate-panel --run-dialog
 
 	# There also is the (new) i3-dmenu-desktop which only displays applications
@@ -166,11 +183,25 @@ mode "resize" {
  
 for_window [instance="guake"] floating enable
 
+client.focused $base0D $base0D $base00 $base01
+client.focused_inactive $base02 $base02 $base03 $base01
+client.unfocused $base01 $base01 $base03 $base01
+client.urgent $base02 $base08 $base07 $base08
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
         status_command i3status
         tray_output primary
+	colors {
+		separator $base03
+		background $base01
+		statusline $base05
+		focused_workspace $base0C $base0D $base00
+		active_workspace $base02 $base02 $base07
+		inactive_workspace $base01 $base01 $base03
+		urgent_workspace $base08 $base08 $base07
+	}	
 }
 
 
@@ -180,4 +211,3 @@ for_window [class="^.*"] border pixel 0
 
 gaps inner 12
 gaps outer 12
-
