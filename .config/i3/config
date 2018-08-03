@@ -30,7 +30,7 @@ bindsym $mod+Return mode $brownee_launcher
 
 mode $brownee_launcher {
 
-	bindsym Shift+Return exec i3-sensible-terminal; mode "default"
+	bindsym Shift+Return exec xfce4-terminal; mode "default"
 	bindsym Shift+q kill ; mode "default"
 	bindsym r exec rofi -show run ; mode "default"
 	bindsym d exec --no-startup-id i3-dmenu-desktop
